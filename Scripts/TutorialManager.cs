@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 public class TutorialManager : MonoBehaviour
 {
-    [SerializeField] private GameObject gameTutorial, controlTutorial;
+    [SerializeField] private GameObject gameTutorial, controlTutorial, tutorialCanvas;
     public static TutorialManager shared;
     private TutorialData tutorailData;
     public bool TutorialCompleted { get; private set; }
@@ -20,6 +20,7 @@ public class TutorialManager : MonoBehaviour
             yield return new WaitForSeconds(2f);
             controlTutorial.SetActive(true);
             yield return new WaitWhile(() => controlTutorial.activeSelf);
+            Destroy(tutorialCanvas);
             TutorialCompleted = true;
             tutorailData.GameTutorialCompleted = TutorialCompleted;
             tutorailData.Save();
