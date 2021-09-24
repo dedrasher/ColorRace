@@ -3,7 +3,7 @@ using System;
 public static class Preferences
 {
     public const int SkinsCount = 5;
-    private const string TutorialDataKey = "TUTORIAL_COMPLETED_KEY";
+    private const string TutorialDataKey = "TUTORIAL_DATA_KEY";
     private const string TimeRecordKey = "TIME_RECORD";
     private const string ScoreRecordKey = "SCORE_RECORD";
     private const string VolumeKey = "VOLUME_KEY";
