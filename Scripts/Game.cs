@@ -40,7 +40,7 @@ public class Game : MonoBehaviour
     }
     private void OnApplicationFocus(bool focus)
     {
-        if (!focus && gameState == GameState.Running)
+        if (!focus && gameState == GameState.Running && tutorialManager.TutorialCompleted)
             Pause();
     }
     public void IncreaseDestroyedCubesCount(bool show)
