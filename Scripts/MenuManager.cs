@@ -25,9 +25,7 @@ public class MenuManager : MonoBehaviour
         LocalizeManager.Init();
         TutorialData.Load();
         tutorialData = TutorialData.Shared;
-#if UNITY_IOS
         Application.targetFrameRate = 60;
-#endif
         if (!tutorialData.GameTutorialCompleted)
             SceneManager.LoadScene(1);
     }
