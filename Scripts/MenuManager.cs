@@ -25,7 +25,7 @@ public class MenuManager : MonoBehaviour
         LocalizeManager.Init();
         TutorialData.Load();
         tutorialData = TutorialData.Shared;
-        Application.targetFrameRate = 60;
+        Application.targetFrameRate = Screen.currentResolution.refreshRate;
         if (!tutorialData.GameTutorialCompleted)
             SceneManager.LoadScene(1);
     }
