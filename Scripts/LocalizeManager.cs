@@ -42,7 +42,7 @@ public static class LocalizeManager
     private readonly static string[] englishStaticWords = { "Max time: ", "Max score: ", "Buy for ", "Play", "Skins", "Money", "Do you really wanna buy this?", "Yes"
             , "No", "Equip", "Remove", "Settings", "Language: ", "RU", "EN","Do you really wanna quit?", "Do you really wanna restart?","Time: ", "Score: ", "Shop", "loading...", "Display FPS"};
     private readonly static string[] russianStaticWords = { "Макс. время: ", "Макс. очки: ", "Купить за ", "Играть", "Скины", "Монеты", "Вы действительно хотите купить это?", "Да",
-        "Нет", "Надеть", "Снять", "Настройки","Язык: ", "РУС", "АНГ", "Вы действительно хотите выйти?", "Вы действительно хотите перезапустить игру?", "Время: ", "Очки: ", "Магазин", "загрузка..." ,"Отображать FPS"};
+        "Нет", "Надеть", "Снять", "Настройки","Язык игры: ", "РУС", "АНГ", "Вы действительно хотите выйти?", "Вы действительно хотите перезапустить игру?", "Время: ", "Очки: ", "Магазин", "загрузка..." ,"Отображать FPS"};
     private readonly static string[] russianGameStaticWords = { "Новый рекорд!", "Пауза", "Продолжить", "Поражение", "Выход", "Рестарт", "Для прохода любого кубика насквозь нажмите здесь!" };
     private const string languageKey = "LANGUAGE_KEY";
     private static Language language;
