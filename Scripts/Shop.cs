@@ -5,6 +5,7 @@ public class Shop : MonoBehaviour
 {
     private GameObject skinViewHolder;
     private Color whiteButton, grayButton;
+    [SerializeField] private RectTransform arrowTransform;
     [SerializeField] private GameObject[] tabs = new GameObject[2];
     [SerializeField] private Image[] tabButtons = new Image[2];
     [SerializeField] private AudioSource purchaseSound;
@@ -38,6 +39,10 @@ public class Shop : MonoBehaviour
     private void Start()
     {
         skinViewHolder = SkinViewController.SharedGameObject;
+        var pos = skinViewHolder.transform.position;
+        var arrowPos = arrowTransform.position;   
+        pos.y = Camera.main.ScreenToWorldPoint(new Vector3(arrowPos.x, arrowPos.y, 3f)).y;
+        skinViewHolder.transform.position = pos;
         SetListener(skins[0]);
         LocalizeManager.AddChangeListener(delegate
         {
