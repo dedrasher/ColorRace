@@ -82,15 +82,23 @@ public class Game : MonoBehaviour
             return seconds < 10 ? $"0{seconds}" : seconds.ToString();
         }
         timeText.text = $"{LocalizeManager.GetLocalizedString(LocalizeManager.Time, false)}{time / 60}:{ Seconds()}";
-        scoreGameOverText.text = LocalizeManager.GetLocalizedString(LocalizeManager.Score, false) + destroyedCubesCount.ToString();
+        scoreGameOverText.text = $"{LocalizeManager.GetLocalizedString(LocalizeManager.Score, false)}{destroyedCubesCount}";
         moneyEarnedText.text = $"+{destroyedCubesCount}";
         var oldTimeRecord = Preferences.TimeRecord;
         var oldScoreRecord = Preferences.ScoreRecord;
         var IsNewRecordGot = oldTimeRecord < time || oldScoreRecord < destroyedCubesCount;
         var tutorialData = TutorialData.Shared;
         var money = Preferences.Money;
-        tutorialData.ShopAlertRequest = money < Skin.СheapestPrice && money + destroyedCubesCount >= Skin.СheapestPrice && !tutorialData.ShopAlertRequest && !tutorialData.ShopAlertDisplayed;
-        tutorialData.Save();
+        var purchasedSkins = Preferences.PurchasedSkins;
+        var purchasedSkinsCount = 0;
+        for (int i = 0; i < purchasedSkins.Length; i++)
+            if (purchasedSkins[i])
+                purchasedSkinsCount++;
+        if (money < Skin.СheapestPrice && money + destroyedCubesCount >= Skin.СheapestPrice && !tutorialData.ShopAlertRequest && !tutorialData.ShopAlertDisplayed && purchasedSkinsCount == 0)
+        {
+            tutorialData.ShopAlertRequest = true;
+            tutorialData.Save();
+        }
         Preferences.SetMoney(destroyedCubesCount, true);
         if (IsNewRecordGot)
         {
