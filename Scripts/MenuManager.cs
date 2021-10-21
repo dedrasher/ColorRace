@@ -65,7 +65,7 @@ public class MenuManager : MonoBehaviour
     }
     public void Play()
     {
-        if (shopAlert.activeSelf && settings.RequestPanelIsActive) return;
+        if (shopAlert.activeSelf || settings.RequestPanelIsActive) return;
         loadingText.SetActive(true);
         SceneManager.LoadScene(1);
     }
