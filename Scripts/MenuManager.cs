@@ -2,8 +2,10 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 public class MenuManager : MonoBehaviour
 {
+    private bool levelIsLoading = false;
     private TutorialData tutorialData;
     public static MenuManager Shared { get; private set; }
     [SerializeField]
@@ -63,15 +65,27 @@ public class MenuManager : MonoBehaviour
         VolumeSwitcher.sprite = volume == 1f ? SoundOn : SoundOff;
         Preferences.Volume = volume;
     }
+    private IEnumerator LaunchGame()
+    {
+        var text = loadingText.GetComponent<TextMeshProUGUI>();
+        var loadingStr = LocalizeManager.GetLocalizedString(LocalizeManager.Loading, false);
+        var operation = SceneManager.LoadSceneAsync(1);
+        operation.allowSceneActivation = true;
+        levelIsLoading = true;
+        while(operation.progress < 0.9f)
+        text.text = $"{loadingStr} {Mathf.Round(operation.progress) + 0.1f * 100f}%";  
+        yield return null;
+    }
+
     public void Play()
     {
-        if (shopAlert.activeSelf || settings.RequestPanelIsActive) return;
+        if (shopAlert.activeSelf || settings.RequestPanelIsActive || levelIsLoading) return;
         loadingText.SetActive(true);
-        SceneManager.LoadScene(1);
+        StartCoroutine(LaunchGame());
     }
     public void OpenShop()
     {
-        if (!SettingsPanel.activeSelf && !settings.RequestPanelIsActive)
+        if (!SettingsPanel.activeSelf && !settings.RequestPanelIsActive && !levelIsLoading)
         {
             if (tutorialData.ShopAlertRequest && shopAlert.activeSelf)
             {
@@ -91,7 +105,7 @@ public class MenuManager : MonoBehaviour
     }
     public void OpenSettings()
     {
-        if (!shopAlert.activeSelf && !settings.RequestPanelIsActive)
+        if (!shopAlert.activeSelf && !settings.RequestPanelIsActive && !levelIsLoading)
             SettingsPanel.SetActive(true);
     }
 }
