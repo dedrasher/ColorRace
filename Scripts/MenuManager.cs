@@ -65,18 +65,18 @@ public class MenuManager : MonoBehaviour
         VolumeSwitcher.sprite = volume == 1f ? SoundOn : SoundOff;
         Preferences.Volume = volume;
     }
-    private IEnumerator LaunchGame()
+ private IEnumerator LaunchGame()
     {
         var text = loadingText.GetComponent<TextMeshProUGUI>();
         var loadingStr = LocalizeManager.GetLocalizedString(LocalizeManager.Loading, false);
         var operation = SceneManager.LoadSceneAsync(1);
-        operation.allowSceneActivation = true;
+        operation.allowSceneActivation = false;
         levelIsLoading = true;
         while(operation.progress < 0.9f)
-        text.text = $"{loadingStr} {Mathf.Round(operation.progress) + 0.1f * 100f}%";  
+        text.text = $"{loadingStr} {Mathf.Round(operation.progress) * 100f}%";
+        operation.allowSceneActivation = true;
         yield return null;
     }
-
     public void Play()
     {
         if (shopAlert.activeSelf || settings.RequestPanelIsActive || levelIsLoading) return;
