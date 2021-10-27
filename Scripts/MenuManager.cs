@@ -67,15 +67,10 @@ public class MenuManager : MonoBehaviour
     }
     private IEnumerator LaunchGame()
     {
-        var text = loadingText.GetComponent<TextMeshProUGUI>();
-        var loadingStr = LocalizeManager.GetLocalizedString(LocalizeManager.Loading, false);
-        var operation = SceneManager.LoadSceneAsync(1);
-        while (operation.progress < 0.9f)
-        {
-            text.text = $"{loadingStr} {Mathf.Round((operation.progress + 0.1f) * 100f)}%";
-            yield return null;
-        }
+        yield return null;
+        SceneManager.LoadSceneAsync(1);
     }
+
     public void Play()
     {
         if (shopAlert.activeSelf || settings.RequestPanelIsActive || levelIsLoading) return;
