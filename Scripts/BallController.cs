@@ -41,7 +41,7 @@ public class BallController : MonoBehaviour
             return effectTimeViewGameObject.activeSelf;
         }
     }
-    private bool canMove
+    private bool CanMove
     {
         get
         {
@@ -204,12 +204,12 @@ public class BallController : MonoBehaviour
 #endif
     public void LeftMove()
     {
-        if (game.State == GameState.Running && canMove)
+        if (game.State == GameState.Running && CanMove)
             Move(-1f);
     }
     public void RightMove()
     {
-        if (game.State == GameState.Running && canMove)
+        if (game.State == GameState.Running && CanMove)
             Move(1f);
     }
 }
